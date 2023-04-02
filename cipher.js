@@ -1,25 +1,30 @@
-function shiftCipher(str, key) {
-  let result = ""
-  let numL
-  for (let l = 0; l < str.length; l++){
-     numL = str.charCodeAt(l)    // number unicode
-   
-    if (numL >= 65 & numL < 78) {
-      numL += key
-    let numLC = String.fromCharCode(numL); //number  unicode cipher
-       result += numLC;
- 
-    } else if (numL >= 78 & numL <= 90) {
-      numL -= key
-    let numLC = String.fromCharCode(numL);
-       result += numLC
-     
-    } else if (numL < 65 | numL > 90) {
-    let numLC = String.fromCharCode(numL);
-     result += numLC
-    }
- 
+function encrypt(str, n) {
+
+  if (n <= 0) {
+    return str;
   }
-    return result
- }
+  
+  let result = "";
+ 
+  for (let l = 0; l < str.length; l++) {
+    let numL = str.charCodeAt(l);
+ 
+    if (numL < 65 || numL > 90) {
+      result += str[l];
+    } else {
+      let numLC = numL - n;
+
+    if (numLC > 90) {
+        numLC -= 26;
+      }
+     if (numLC < 65) {
+        numLC += 26;
+      }
+    
+      result += String.fromCharCode(numLC);
+    }
+  }
+
+  return result;
+}
  
